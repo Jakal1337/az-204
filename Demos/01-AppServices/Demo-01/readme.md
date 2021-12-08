@@ -13,7 +13,7 @@ Use [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/).
 Scaffold and run App:
 
 ```bash
-dotnet new api -n CliApi
+dotnet new api -n cli-api
 dotnet run
 ```
 
@@ -29,9 +29,7 @@ Deploy App using [Azure App Service](https://marketplace.visualstudio.com/items?
 
 ## Deploy using Publishing Profile
 
-Demo uses [mvc-devops sample](https://github.com/arambazamba/mvc-devops).
-
-Navigate to `./mvc-skills/Properties/PublishProfile`
+Navigate to `./publishing-profile/Properties/PublishProfile`
 
 Add a file called `azure.pubxml` with the following content:
 
@@ -108,9 +106,7 @@ Demo Steps:
 
 > Note: FoodApp is a seperate Git Repo: [https://github.com/ARambazamba/FoodApp](https://github.com/ARambazamba/FoodApp)
 
-Deploy Api using [GitHub Actions](https://github.com/Azure/actions) and fix the path in the [DOTNET CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/) tasks in order to avoid path issues
-
-![path](_images/path.jpg)
+Deploy Api using [GitHub Actions](https://github.com/Azure/actions) and fix the path in the [DOTNET CLI](https://docs.microsoft.com/en-us/dotnet/core/tools/) tasks in order to avoid path issues becaus of monorepo-pattern.
 
 Your workflow file, execpt the connection info should look like this:
 
