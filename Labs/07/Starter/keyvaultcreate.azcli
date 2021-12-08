@@ -1,0 +1,15 @@
+rnd=joshua
+grp=secgrp$rnd
+loc=westeurope
+
+az group create -n $grp -l $loc
+
+az storage account create --name secursto$rnd --resource-group $grp --location $loc --sku Standard_LRS
+
+az keyvault create --resource-group $grp --name vaultfor$rnd --location $loc 
+
+az functionapp create --name thisisasecurefunc$rnd --resource-group $grp --storage-account secursto$rnd --consumption-plan-location $loc --functions-version 2
+
+cs=$(az storage account show-connection-string --name secursto$rnd --resource-group $grp --key primary)
+echo $cs 
+az keyvault secret set --vault-name vaultfor$rnd --name "storagecreds" --value "$cs" 
