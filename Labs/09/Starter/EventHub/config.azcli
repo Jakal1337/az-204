@@ -1,0 +1,24 @@
+#Gutes Training: https://docs.microsoft.com/en-us/learn/modules/enable-reliable-messaging-for-big-data-apps-using-event-hubs/
+
+rnd=joshua
+grp=eventhubgrp$rnd
+hubnamespace=myeventhubnamespace$rnd
+hubname=myeventhub
+stoname=stoeventhub$rnd
+
+az group create --name $grp --location westeurope 
+
+az eventhubs namespace create --name $hubnamespace --resource-group $grp --location westeurope
+
+az eventhubs namespace authorization-rule keys list --name RootManageSharedAccessKey --namespace-name $hubnamespace --resource-group $grp
+
+az eventhubs eventhub create --name $hubname --namespace-name $hubnamespace --resource-group $grp
+
+az storage account create --name $stoname --sku Standard_LRS --encryption-service blob --resource-group $grp
+
+az storage account keys list --account-name $stoname
+
+key=$(az storage account show-connection-string -n $stoname -o tsv)
+echo $key
+
+az storage container create --name messages --connection-string "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=stoeventhubjoshua;AccountKey=bqxiNTf7AbPOhaJu+/IhSj7Ny3wVB6ThUtkkMF1P8Na8gDotV9vAgNxmXxCcC8vdiD3bQW5RvgA0fqw+9HVmRg=="
